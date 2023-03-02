@@ -15,12 +15,14 @@ public class WeatherReportService {
         RestTemplate restTemplate = new RestTemplate();
         String url = API_URL + "?lat=" + latitude + "&lon=" + longitude + "&appid=" + API_KEY;
         WeatherApiResponse response = restTemplate.getForObject(url, WeatherApiResponse.class);
-
         WeatherReport report = new WeatherReport();
         WeatherApiResponse.Main main = response.getMain();
         report.setTemperature(main.getTemperature());
         report.setHumidity(main.getHumidity());
-
+        report.setPressure(main.getPressure());
+        report.setCity(main.getCity());
+        report.setCountry(main.getCountry());
+        report.setRegion(main.getRegion());
         return report;
     }
 }
